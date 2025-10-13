@@ -1,0 +1,87 @@
+@import '../../../variables';
+@import '../../../media';
+
+.main {
+  display: flex;
+  padding: 20px;
+  font-family: "Inter", sans-serif;
+  color: $primary-color;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  @include xs{
+    display: none;
+  }
+}
+
+.name {
+  font-size: 24px;
+}
+
+.photo_user {
+  border-radius: 50%;
+}
+
+.searchContainer {
+  display: flex;
+  align-items: center;
+  max-width: 500px;
+  width: 100%;
+  border: 2px solid #c5c5c5;
+  border-radius: 20px;
+  overflow: hidden;
+  max-height: 50px;
+  transition: border-color 0.2s ease;
+  @include xs{
+    max-width: 100%;
+    max-height: 40px;
+    border-radius: 15px;
+  }
+}
+
+.searchContainer:focus-within {
+  border: 2px solid $primary-color;
+}
+
+.searchInput {
+  flex: 1;
+  border: none;
+  padding: 15px;
+  font-size: 16px;
+  outline: none;
+  font-family: "Inter", sans-serif;
+  @include xs{
+    font-size: 14px;
+  }
+}
+
+.searchInput::placeholder {
+  color: #c5c5c5;
+}
+
+.searchButton {
+  border: none;
+  padding: 15px 0 15px 15px;
+  cursor: cell;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  transition: background 0.2s, color 0.2s;
+  background: white;
+  color: #c5c5c5;
+}
+
+.searchIcon {
+  stroke: currentColor;
+  transition: stroke 0.2s ease;
+}
+
+.searchContainer:focus-within .searchButton {
+  color: $primary-color;
+}
