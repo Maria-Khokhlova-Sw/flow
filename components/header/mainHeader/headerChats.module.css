@@ -3,8 +3,7 @@
  */
 .main {
   display: flex;
-  padding: 20px;
-  font-family: "Inter", sans-serif;
+  padding-bottom: 10px;
   color: #007DB8;
   justify-content: space-between;
   gap: 30px;
@@ -34,7 +33,7 @@
   align-items: center;
   max-width: 500px;
   width: 100%;
-  border: 2px solid #c5c5c5;
+  border: 1.5px solid #c5c5c5;
   border-radius: 20px;
   overflow: hidden;
   max-height: 50px;
@@ -58,7 +57,6 @@
   padding: 15px;
   font-size: 16px;
   outline: none;
-  font-family: "Inter", sans-serif;
 }
 @media (width <= 600px) {
   .searchInput {
@@ -73,7 +71,6 @@
 .searchButton {
   border: none;
   padding: 15px 0 15px 15px;
-  cursor: cell;
   display: flex;
   align-items: center;
   justify-content: center;

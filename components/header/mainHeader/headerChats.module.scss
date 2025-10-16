@@ -1,10 +1,9 @@
-@import '../../../variables';
-@import '../../../media';
+@use '../../../app/variables' as *;
+@use '../../../app/media' as *;
 
 .main {
   display: flex;
-  padding: 20px;
-  font-family: "Inter", sans-serif;
+  padding-bottom: 10px;
   color: $primary-color;
   justify-content: space-between;
   gap: 30px;
@@ -32,7 +31,7 @@
   align-items: center;
   max-width: 500px;
   width: 100%;
-  border: 2px solid #c5c5c5;
+  border: 1.5px solid $light-gray;
   border-radius: 20px;
   overflow: hidden;
   max-height: 50px;
@@ -54,27 +53,25 @@
   padding: 15px;
   font-size: 16px;
   outline: none;
-  font-family: "Inter", sans-serif;
   @include xs{
     font-size: 14px;
   }
 }
 
 .searchInput::placeholder {
-  color: #c5c5c5;
+  color: $light-gray;
 }
 
 .searchButton {
   border: none;
   padding: 15px 0 15px 15px;
-  cursor: cell;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 18px;
   transition: background 0.2s, color 0.2s;
   background: white;
-  color: #c5c5c5;
+  color: $light-gray;
 }
 
 .searchIcon {

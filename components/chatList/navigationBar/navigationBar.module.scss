@@ -1,0 +1,21 @@
+@use '../../../app/variables' as *;
+@use '../../../app/media.css' as *;
+
+.navigationBar{
+  display: flex;
+  gap: 15px;
+  padding-bottom: 10px;
+}
+.navTab{
+  padding:10px;
+  background-color: white;
+  border-radius: 10px;
+  border: 1.5px solid $primary-color;
+  cursor: pointer;
+  color: $primary-color;
+}
+.active{
+  background-color: $primary-color;
+  color: white;
+  border: none;
+}

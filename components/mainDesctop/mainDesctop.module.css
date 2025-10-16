@@ -1,0 +1,21 @@
+/**
+   * 1280
+ */
+.desk {
+  display: flex;
+  flex-direction: row;
+  height: calc(100vh - 110px);
+  width: 7000px;
+  overflow: hidden;
+}
+
+.background {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  position: relative;
+  right: 0;
+}
+
+/*# sourceMappingURL=mainDesctop.module.css.map */

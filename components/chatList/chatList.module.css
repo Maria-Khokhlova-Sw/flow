@@ -1,0 +1,38 @@
+/**
+   * 1280
+ */
+.user_item {
+  list-style: none;
+  color: #302E2E;
+  height: 70px;
+  border-bottom: 1px solid #c5c5c5;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+  font-size: 16px;
+}
+
+.message {
+  color: #c5c5c5;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.user_list {
+  width: 100%;
+}
+
+.photo_user {
+  border-radius: 50%;
+}
+
+.name {
+  font-weight: 600;
+}
+
+/*# sourceMappingURL=chatList.module.css.map */

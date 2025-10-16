@@ -1,0 +1,26 @@
+/**
+   * 1280
+ */
+
+.navigationBar {
+  display: flex;
+  gap: 15px;
+  padding-bottom: 10px;
+}
+
+.navTab {
+  padding: 10px;
+  background-color: white;
+  border-radius: 10px;
+  border: 1.5px solid #007DB8;
+  cursor: pointer;
+  color: #007DB8;
+}
+
+.active {
+  background-color: #007DB8;
+  color: white;
+  border: none;
+}
+
+/*# sourceMappingURL=navigationBar.module.css.map */

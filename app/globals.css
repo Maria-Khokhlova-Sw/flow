@@ -1,15 +1,19 @@
-@font-face {
-    font-family: 'Inter';
-    src: url('/font/Inter-VariableFont_opsz,wght.ttf') format('truetype');
-    font-weight: 100 900;
-    font-style: normal;
-    font-display: swap;
+body {
+    padding: 0 30px;
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+
+    @media(max-width:600px){
+        padding: 20px 0;
+    }
 }
 
-@font-face {
-    font-family: 'Borel';
-    src: url('/font/Borel-Regular.ttf') format('truetype');
-    font-weight: 100 900;
-    font-style: normal;
-    font-display: swap;
+ul {
+    padding: 0;
+    list-style: none;
+    margin: 0;
+}
+
+.container {
+    display: flex;
 }
