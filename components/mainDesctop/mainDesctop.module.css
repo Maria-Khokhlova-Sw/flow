@@ -4,7 +4,7 @@
 .desk {
   display: flex;
   flex-direction: row;
-  height: calc(100vh - 110px);
+  height: calc(100vh - 125px);
   width: 7000px;
   overflow: hidden;
 }
