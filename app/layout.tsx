@@ -18,12 +18,14 @@ export default function RootLayout() {
         <html lang="en">
         <body>
         <HeaderChats />
-        <NavigationBar/>
-        <div className="container">
+        <div className="MainContainer">
             <UserProvider>
-                <ChatList/>
+                <div className="Container">
+                    <NavigationBar/>
+                    <ChatList/>
+                </div>
+                <MainDesktop/>
             </UserProvider>
-            <MainDesktop/>
         </div>
         </body>
         </html>

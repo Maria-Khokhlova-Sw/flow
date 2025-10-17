@@ -2,20 +2,82 @@
    * 1280
  */
 .desk {
+  background-color: white;
+  flex: 0 0 70%;
   display: flex;
-  flex-direction: row;
-  height: calc(100vh - 125px);
-  width: 7000px;
-  overflow: hidden;
+  flex-direction: column;
+  height: calc(100vh - 80px);
+  min-height: 0;
 }
 
-.background {
+.chatHeader {
+  background-color: #007DB8;
+  color: white;
+  font-size: 20px;
+  display: flex;
+  gap: 16px;
+  padding: 10px;
+  align-items: center;
+  flex: 0 0 auto;
+}
+
+.messages {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 0;
+}
+
+.inputRow {
+  height: 50px;
+  flex: 0 0 auto;
+  display: flex;
+  gap: 8px;
+  padding: 10px 0;
+  background: #fff;
+  justify-content: space-between;
+}
+
+.avatar {
+  border-radius: 50%;
+}
+
+.me {
+  background-color: #007DB8;
+  color: white;
+  display: flex;
+  justify-content: flex-end;
+  align-self: flex-end;
+}
+
+.bubble {
+  padding: 16px;
+  border-radius: 4px;
+  max-width: 500px;
+}
+
+.them {
+  border: 1px solid #c5c5c5;
+  align-self: flex-start;
+}
+
+.input {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  position: relative;
-  right: 0;
+  border-radius: 10px;
+  border: 1.5px solid #c5c5c5;
+  padding-left: 10px;
+}
+
+.buttonSubmit {
+  background-color: #007DB8;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-weight: bold;
+  padding: 15px;
 }
 
 /*# sourceMappingURL=mainDesctop.module.css.map */
