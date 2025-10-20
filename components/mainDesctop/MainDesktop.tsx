@@ -49,6 +49,12 @@ export default function MainDesktop() {
                         title={new Date(m.timestamp).toLocaleString()}
                     >
                         {m.text}
+                        <div className={styles.messTime} >
+                            {new Date(m.timestamp).toLocaleTimeString("ru-RU", {
+                                hour: "2-digit",
+                                minute: "2-digit",
+                            })}
+                        </div>
                     </div>
                 ))}
             </div>

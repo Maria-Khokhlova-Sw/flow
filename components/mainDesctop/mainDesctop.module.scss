@@ -28,7 +28,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding: 10px 0;
+  padding: 10px 15px;
   border: 1.5px solid $light-gray;
   border-top: none;
 }
@@ -38,9 +38,11 @@
   flex: 0 0 auto;
   display: flex;
   gap: 8px;
-  padding: 10px 0;
   background: #fff;
   justify-content: space-between;
+  border-left: 1.5px solid $light-gray;
+  border-right: 1.5px solid $light-gray;
+  padding: 10px;
 
 }
 
@@ -50,14 +52,15 @@
   background-color: $primary-color;
   color: white;
   display: flex;
-  justify-content: flex-end;
   align-self: flex-end;
 }
 
 .bubble{
-  padding: 16px;
+  padding: 10px 10px 20px 10px;
   border-radius: 4px;
   max-width: 500px;
+  position: relative;
+  min-width: 25px;
 }
 
 .them{
@@ -83,4 +86,12 @@
   &:hover{
     cursor: pointer;
   }
+}
+
+.messTime{
+  position: absolute;
+  font-size: 12px;
+  bottom: 3px;
+  right: 7px;
+  opacity: 85%;
 }

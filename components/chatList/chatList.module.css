@@ -18,12 +18,17 @@
 
 .message {
   color: #c5c5c5;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 15px;
 }
 
 .content {
   display: flex;
   flex-direction: column;
   gap: 5px;
+  width: 100%;
+  position: relative;
 }
 
 .user_list {
@@ -38,6 +43,18 @@
 
 .name {
   font-weight: 600;
+}
+
+.messageInfo {
+  position: absolute;
+  height: 100%;
+  color: #007db8;
+  font-size: 12px;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /*# sourceMappingURL=chatList.module.css.map */

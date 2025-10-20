@@ -17,12 +17,17 @@
 }
 .message{
   color: $light-gray;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 15px;
 }
 
 .content{
   display: flex;
   flex-direction: column;
   gap: 5px;
+  width: 100%;
+  position: relative;
 }
 
 .user_list{
@@ -38,3 +43,16 @@
 .name{
   font-weight: 600;
 }
+
+.messageInfo{
+  position: absolute;
+  height: 100%;
+  color: $primary-color;
+  font-size: 12px;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+

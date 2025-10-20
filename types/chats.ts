@@ -2,7 +2,6 @@ export interface User {
     id: number
     name: string
     photoUrl: string
-    message: string
 }
 
 export interface Message {
@@ -10,6 +9,7 @@ export interface Message {
     author: "me" | "them"
     text: string
     timestamp: number
+    status: "sending" | "sent" | "read"
 }
 
 export interface Conversations {
@@ -22,4 +22,5 @@ export interface UserContextType {
     selectedUserId: number | null
     selectUser: (id: number) => void
     sendMessage: (userId: number, text: string) => void
+    markMessagesAsRead: (userId: number) => void
 }
