@@ -12,14 +12,14 @@
   padding: 12px;
   background-color: white;
   border-radius: 10px;
-  border: 1.5px solid #007DB8;
+  border: 1.5px solid #007db8;
   cursor: pointer;
-  color: #007DB8;
+  color: #007db8;
   margin: 12px 0;
 }
 
 .active {
-  background-color: #007DB8;
+  background-color: #007db8;
   color: white;
   border: none;
 }

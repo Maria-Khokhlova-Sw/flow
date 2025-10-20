@@ -3,10 +3,11 @@
  */
 .main {
   display: flex;
-  padding-bottom: 10px;
-  color: #007DB8;
+  color: #007db8;
   justify-content: space-between;
   gap: 30px;
+  padding: 10px;
+  border: 1.5px solid #c5c5c5;
 }
 
 .user {
@@ -48,7 +49,7 @@
 }
 
 .searchContainer:focus-within {
-  border: 2px solid #007DB8;
+  border: 2px solid #007db8;
 }
 
 .searchInput {
@@ -86,7 +87,7 @@
 }
 
 .searchContainer:focus-within .searchButton {
-  color: #007DB8;
+  color: #007db8;
 }
 
 /*# sourceMappingURL=headerChats.module.css.map */

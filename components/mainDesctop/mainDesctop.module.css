@@ -11,14 +11,15 @@
 }
 
 .chatHeader {
-  background-color: #007DB8;
-  color: white;
+  color: #007db8;
   font-size: 20px;
   display: flex;
   gap: 16px;
   padding: 10px;
   align-items: center;
   flex: 0 0 auto;
+  border: 1.5px solid #c5c5c5;
+  border-top: none;
 }
 
 .messages {
@@ -29,6 +30,8 @@
   flex-direction: column;
   gap: 8px;
   padding: 10px 0;
+  border: 1.5px solid #c5c5c5;
+  border-top: none;
 }
 
 .inputRow {
@@ -46,7 +49,7 @@
 }
 
 .me {
-  background-color: #007DB8;
+  background-color: #007db8;
   color: white;
   display: flex;
   justify-content: flex-end;
@@ -72,12 +75,15 @@
 }
 
 .buttonSubmit {
-  background-color: #007DB8;
+  background-color: #007db8;
   border: none;
   border-radius: 10px;
   color: white;
   font-weight: bold;
   padding: 15px;
+}
+.buttonSubmit:hover {
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=mainDesctop.module.css.map */

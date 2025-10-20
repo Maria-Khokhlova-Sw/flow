@@ -3,10 +3,11 @@
 
 .main {
   display: flex;
-  padding-bottom: 10px;
   color: $primary-color;
   justify-content: space-between;
   gap: 30px;
+  padding: 10px;
+  border: 1.5px solid $light-gray;
 }
 
 .user {

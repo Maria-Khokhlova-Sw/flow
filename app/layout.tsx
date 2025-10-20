@@ -2,10 +2,10 @@ import type { Metadata } from 'next';
 import './globals.css';
 import {UserProvider} from "@/hooks/userContext";
 import HeaderChats from '@/components/header/mainHeader/headerChats';
-import ChatList from "@/components/chatList/chatList";
 import NavigationBar from "@/components/chatList/navigationBar/NavigationBar";
 import './media.scss'
 import MainDesktop from "@/components/mainDesctop/MainDesktop";
+import UserList from "@/components/chatList/chatList";
 
 export const metadata: Metadata = {
     title: 'Flow',
@@ -22,7 +22,7 @@ export default function RootLayout() {
             <UserProvider>
                 <div className="Container">
                     <NavigationBar/>
-                    <ChatList/>
+                    <UserList/>
                 </div>
                 <MainDesktop/>
             </UserProvider>

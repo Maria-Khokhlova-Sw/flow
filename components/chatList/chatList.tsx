@@ -1,34 +1,30 @@
-"use client";
-import styles from "./chatList.module.scss";
-import React from "react";
-import { useUsers } from "@/hooks/userContext";
+"use client"
+import styles from "./chatList.module.scss"
+import { useUsers } from "@/hooks/userContext"
+import { lastMessage } from "@/hooks/last-message"
+import { UserListItem } from "./chatList-item"
 
 export default function UserList() {
-    const { users, selectedUserId, selectUser } = useUsers();
+    const { users, selectedUserId, selectUser } = useUsers()
+    const { getLastMessage } = lastMessage()
 
     return (
         <div className={styles.user_list}>
             <ul>
-                {users.map((user) => (
-                    <li
-                        key={user.id}
-                        className={`${styles.user_item} ${selectedUserId === user.id ? styles.active : ""}`}
-                        onClick={() => selectUser(user.id)}
-                    >
-                        <img
-                            src={user.photoUrl}
-                            alt={user.name}
-                            width="50"
-                            height="50"
-                            className={styles.photo_user}
+                {users.map((user) => {
+                    const lastMessage = getLastMessage(user.id)
+
+                    return (
+                        <UserListItem
+                            key={user.id}
+                            user={user}
+                            lastMessage={lastMessage}
+                            isSelected={selectedUserId === user.id}
+                            onSelect={() => selectUser(user.id)}
                         />
-                        <div className={styles.content}>
-                            <div className={styles.name}>{user.name}</div>
-                            <div className={styles.message}>начните общение</div>
-                        </div>
-                    </li>
-                ))}
+                    )
+                })}
             </ul>
         </div>
-    );
+    )
 }

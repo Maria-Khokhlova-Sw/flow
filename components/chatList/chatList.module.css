@@ -12,6 +12,9 @@
   gap: 10px;
   font-size: 16px;
 }
+.user_item:hover {
+  cursor: pointer;
+}
 
 .message {
   color: #c5c5c5;
