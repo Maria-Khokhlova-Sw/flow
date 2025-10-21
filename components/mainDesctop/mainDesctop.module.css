@@ -28,7 +28,7 @@
   overflow: auto;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
   padding: 10px 15px;
   border: 1.5px solid #c5c5c5;
   border-top: none;
@@ -95,6 +95,23 @@
   bottom: 3px;
   right: 7px;
   opacity: 85%;
+}
+
+.mainDesktop {
+  display: flex;
+  background-color: #007db8;
+  height: 100%;
+  color: white;
+  padding: 20px;
+}
+
+.random {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  font-size: 28px;
+  text-align: center;
 }
 
 /*# sourceMappingURL=mainDesctop.module.css.map */

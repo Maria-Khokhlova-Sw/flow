@@ -16,9 +16,25 @@ export function UserListItem({ user, lastMessage, unreadCount,  isSelected, onSe
         if(message.author !== "me") return null
 
         if (message.status === "read") {
-            return <span className={styles.status}>++</span>
+            return(
+                <span className={styles.status}>
+                    <img
+                        src="/svg/indicator.svg"
+                        alt="прочитано"
+                        width="30" height="15"
+                        className="brightness-0 saturate-100"
+                        style={{
+                            filter: "invert(38%) sepia(98%) saturate(2476%) hue-rotate(200deg) brightness(95%) contrast(101%)",
+                        }}
+                    />
+                </span>
+            )
         }else if(message.status ==="sent"){
-            return <span className={styles.status}>+</span>
+            return (
+                <span className={styles.status}>
+                    <img src={"/svg/indicator.svg"} alt={"индикатор"} width="30" height="15"/>
+                </span>
+            )
         }
         return null
     }

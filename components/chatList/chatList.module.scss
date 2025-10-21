@@ -47,7 +47,7 @@
 .messageInfo{
   position: absolute;
   height: 100%;
-  color: $primary-color;
+  color: $light-gray;
   font-size: 12px;
   right: 10px;
   display: flex;
@@ -56,3 +56,10 @@
   align-items: center;
 }
 
+.unread_badge{
+  background-color: $primary-color;
+  padding: 4px 8px;
+  border-radius: 50%;
+  color: white;
+  font-weight: bold;
+}

@@ -1,33 +1,48 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import styles from "./mainDesctop.module.scss";
+import { useGreetings } from "@/hooks/greetingsContext"
 import { useUsers } from "@/hooks/userContext";
 import cn from "classnames";
 
 export default function MainDesktop() {
-    const { users, conversations, selectedUserId, sendMessage } = useUsers();
-    const [text, setText] = useState("");
-    const listRef = useRef<HTMLDivElement | null>(null);
-
-    const selectedUser = users.find((u) => u.id === selectedUserId) || null;
-    const msgs = (selectedUserId && conversations[selectedUserId]) || [];
+    const { users, conversations, selectedUserId, sendMessage, markMessagesAsRead } = useUsers()
+    const { randomGreeting } = useGreetings()
+    const [text, setText] = useState("")
+    const listRef = useRef<HTMLDivElement | null>(null)
+    const selectedUser = users.find((u) => u.id === selectedUserId) || null
+    const mess = (selectedUserId && conversations[selectedUserId]) || []
 
     useEffect(() => {
         if (listRef.current) {
-            listRef.current.scrollTop = listRef.current.scrollHeight;
+            listRef.current.scrollTop = listRef.current.scrollHeight
         }
-    }, [selectedUserId, msgs.length]);
+    }, [selectedUserId, mess.length])
+
+    useEffect(() => {
+        if (selectedUserId) {
+            markMessagesAsRead(selectedUserId)
+        }
+    }, [selectedUserId, markMessagesAsRead])
 
     const onSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        if (!selectedUserId) return;
-        sendMessage(selectedUserId, text);
-        setText("");
-    };
+        e.preventDefault()
+        if (!selectedUserId) return
+        sendMessage(selectedUserId, text)
+        setText("")
+    }
 
     if (!selectedUser) {
-        return <div className={styles.desk} />;
+        return (
+            <div className={styles.desk}>
+                <div className={styles.mainDesktop}>
+                <div className={styles.random}>{randomGreeting}</div>
+                </div>
+            </div>
+        )
     }
+
+
     return (
         <div className={styles.desk}>
             <div className={styles.chatHeader}>
@@ -42,7 +57,7 @@ export default function MainDesktop() {
             </div>
 
             <div className={styles.messages} ref={listRef}>
-                {msgs.map((m) => (
+                {mess.map((m) => (
                     <div
                         key={m.id}
                         className={cn(styles.bubble, m.author === "me" ? styles.me : styles.them)}

@@ -6,6 +6,7 @@ import NavigationBar from "@/components/chatList/navigationBar/NavigationBar";
 import './media.scss'
 import MainDesktop from "@/components/mainDesctop/MainDesktop";
 import UserList from "@/components/chatList/chatList";
+import {GreetingsProvider} from "@/hooks/greetingsContext";
 
 export const metadata: Metadata = {
     title: 'Flow',
@@ -24,7 +25,9 @@ export default function RootLayout() {
                     <NavigationBar/>
                     <UserList/>
                 </div>
-                <MainDesktop/>
+                <GreetingsProvider>
+                    <MainDesktop/>
+                </GreetingsProvider>
             </UserProvider>
         </div>
         </body>
