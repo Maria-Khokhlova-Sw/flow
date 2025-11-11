@@ -1,13 +1,11 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import styles from "./mainDesctop.module.scss";
-import { useGreetings } from "@/hooks/greetingsContext"
 import { useUsers } from "@/hooks/userContext";
 import cn from "classnames";
 
 export default function MainDesktop() {
     const { users, conversations, selectedUserId, sendMessage, markMessagesAsRead } = useUsers()
-    const { randomGreeting } = useGreetings()
     const [text, setText] = useState("")
     const listRef = useRef<HTMLDivElement | null>(null)
     const selectedUser = users.find((u) => u.id === selectedUserId) || null
@@ -35,8 +33,8 @@ export default function MainDesktop() {
     if (!selectedUser) {
         return (
             <div className={styles.desk}>
-                <div className={styles.mainDesktop}>
-                <div className={styles.random}>{randomGreeting}</div>
+                <div className={cn(styles.desk, styles.randomState)}>
+                    <div className={styles.random}>Ты в потоке</div>
                 </div>
             </div>
         )

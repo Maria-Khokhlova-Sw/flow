@@ -16,6 +16,8 @@
   }
 }
 .message{
+  overflow: hidden;
+  max-width: 350px;
   color: $light-gray;
   display: flex;
   justify-content: space-between;
@@ -33,7 +35,7 @@
 .user_list{
   flex: 1 1 auto;
   min-height: 0;
-  overflow: hidden;
+  overflow: auto;
 }
 
 .photo_user {

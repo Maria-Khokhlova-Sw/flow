@@ -3,7 +3,8 @@
  */
 .desk {
   background-color: white;
-  flex: 0 0 70%;
+  flex: 1 1 0;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   height: calc(100vh - 80px);
@@ -97,12 +98,14 @@
   opacity: 85%;
 }
 
-.mainDesktop {
-  display: flex;
+.randomState {
   background-color: #007db8;
-  height: 100%;
   color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 20px;
+  height: 100%;
 }
 
 .random {
