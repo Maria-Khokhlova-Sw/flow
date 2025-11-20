@@ -3,30 +3,46 @@ import styles from "./chatList.module.scss"
 import { useUsers } from "@/hooks/userContext"
 import { lastMessage } from "@/hooks/last-message"
 import { UserListItem } from "./chatList-item"
-import NavigationBar from "@/components/chatList/navigationBar/NavigationBar";
-import { ResizableBox } from 'react-resizable'
+import NavigationBar from "@/components/chatList/navigationBar/NavigationBar"
+import { ResizableBox } from "react-resizable"
+import { useEffect, useState } from "react"
 
 export default function UserList() {
     const { users, selectedUserId, selectUser } = useUsers()
     const { getLastMessage, getUnreadCount } = lastMessage()
+    const [height, setHeight] = useState(0)
+    const [width, setWidth] = useState(350)
 
-    const initialWidth = 350;
+    const initialWidth = 350
+
+    useEffect(() => {
+        const calculateHeight = () => {
+            setHeight(window.innerHeight - 80)
+        }
+        calculateHeight()
+        window.addEventListener("resize", calculateHeight)
+        return () => window.removeEventListener("resize", calculateHeight)
+    }, [])
+
+    const handleResize = (event: any, data: any) => {
+        setWidth(data.size.width)
+    }
 
     return (
         <ResizableBox
-            width={initialWidth}
-
+            width={width}
+            height={height}
+            onResize={handleResize}
             style={{
-                height: '100%',
-                display: 'flex',
-                flexDirection: 'column'
+                display: "flex",
+                flexDirection: "column",
+                overflow: "hidden",
             }}
-
-            resizeHandles={['e']}
-            minConstraints={[100, Infinity]}
-            maxConstraints={[350, Infinity]}
+            resizeHandles={["e"]}
+            minConstraints={[100, height]}
+            maxConstraints={[600, height]}
         >
-            <NavigationBar/>
+            <NavigationBar />
             <div className={styles.user_list}>
                 <ul>
                     {users.map((user) => {

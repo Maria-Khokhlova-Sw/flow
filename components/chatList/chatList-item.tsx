@@ -50,28 +50,38 @@ export function UserListItem({ user, lastMessage, unreadCount,  isSelected, onSe
             <div className={styles.content}>
                 <div className={styles.name}>{user.name}</div>
                 {lastMessage ? (
-                    <div className={styles.message}>
-                        <div className={styles.mess}>
-                            <span className={styles.author}>{lastMessage.author === "me" ? "Вы: " : ""}</span> {lastMessage.text}
+                    <>
+                        <div className={styles.message}>
+                            <div className={styles.mess}>
+                                <span className={styles.author}>{lastMessage.author === "me" ? "Вы: " : ""}</span> {lastMessage.text}
+                            </div>
                         </div>
-                    </div>
+                        <div className={styles.messageInfo}>
+                            <div className={styles.message_meta}>
+                      <span className={styles.time}>
+                          {new Date(lastMessage.timestamp).toLocaleTimeString("ru-RU", {
+                              hour: "2-digit",
+                              minute: "2-digit",
+                          })}
+                      </span>
+                            </div>
+                            <div className={styles.indicators}>
+                                {renderStatusIndicator(lastMessage)}
+                                {unreadCount > 0 && <span className={styles.unread_badge}>{unreadCount}</span>}
+                            </div>
+                        </div>
+                    </>
                 ) : (
-                    <div className={styles.message}>начните общение</div>
+                    <>
+                        <div className={styles.message}>начните общение</div>
+                        <div className={styles.messageInfo}>
+                            <div className={styles.message_meta}></div>
+                            <div className={styles.indicators}>
+                                {unreadCount > 0 && <span className={styles.unread_badge}>{unreadCount}</span>}
+                            </div>
+                        </div>
+                    </>
                 )}
-                <div className={styles.messageInfo}>
-                    <div className={styles.message_meta}>
-                          <span className={styles.time}>
-                            {new Date(lastMessage.timestamp).toLocaleTimeString("ru-RU", {
-                                hour: "2-digit",
-                                minute: "2-digit",
-                            })}
-                          </span>
-                    </div>
-                    <div className={styles.indicators}>
-                        {renderStatusIndicator(lastMessage)}
-                        {unreadCount > 0 && <span className={styles.unread_badge}>{unreadCount}</span>}
-                    </div>
-                </div>
             </div>
         </li>
     )

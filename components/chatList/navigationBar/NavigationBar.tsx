@@ -9,7 +9,7 @@ export default function NavigationBar() {
         'Непрочитанные'
     ];
     const [activeIndex, setActiveIndex] = useState(0);
-    const handleClick = (index) => {
+    const handleClick = (index:number) => {
         setActiveIndex(index);
     }
 

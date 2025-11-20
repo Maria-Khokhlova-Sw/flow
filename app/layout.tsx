@@ -5,6 +5,7 @@ import HeaderChats from '@/components/header/mainHeader/headerChats';
 import './media.scss'
 import MainDesktop from "@/components/mainDesctop/MainDesktop";
 import UserList from "@/components/chatList/chatList";
+import 'react-resizable/css/styles.css'
 
 
 export const metadata: Metadata = {

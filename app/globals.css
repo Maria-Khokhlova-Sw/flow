@@ -20,5 +20,17 @@ ul {
     display: flex;
     height: calc(100vh - 80px);
 }
+.react-resizable {
+    position: relative;
+}
 
-
+.react-resizable-handle-e {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 10px;
+    height: 100%;
+    cursor: ew-resize;
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.1);
+}
