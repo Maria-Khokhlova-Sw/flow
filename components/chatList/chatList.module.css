@@ -18,18 +18,25 @@
 
 .message {
   overflow: hidden;
-  max-width: 350px;
+  max-width: 90%;
   color: #c5c5c5;
   display: flex;
   justify-content: space-between;
   padding-right: 15px;
 }
 
+.mess {
+  display: flex;
+  flex-shrink: 1;
+  min-width: 0;
+  max-width: 80%;
+}
+
 .content {
   display: flex;
   flex-direction: column;
   gap: 5px;
-  width: 100%;
+  width: 80%;
   position: relative;
 }
 
@@ -45,6 +52,7 @@
 
 .name {
   font-weight: 600;
+  flex-wrap: nowrap;
 }
 
 .messageInfo {
@@ -65,6 +73,14 @@
   border-radius: 50%;
   color: white;
   font-weight: bold;
+}
+
+.textMess {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-shrink: 1;
+  min-width: 0;
 }
 
 /*# sourceMappingURL=chatList.module.css.map */

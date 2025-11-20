@@ -30,7 +30,20 @@ ul {
     right: 0;
     width: 10px;
     height: 100%;
-    cursor: ew-resize;
+    cursor: pointer;
     z-index: 100;
     background: rgba(0, 0, 0, 0.1);
+}
+
+.react-resizable-handle {
+    width: 10px !important;
+    height: 100% !important;
+    background-color: rgba(0, 0, 0, 0);
+    transform: rotate(0deg) !important;
+    z-index: 1;
+    top: 0 !important;
+    transition: background-color 0.4s ease, transform 0.4s ease;
+}
+.react-resizable-handle:hover {
+    background-color: rgba(0, 0, 0, 0.2);
 }

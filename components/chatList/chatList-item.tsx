@@ -53,7 +53,7 @@ export function UserListItem({ user, lastMessage, unreadCount,  isSelected, onSe
                     <>
                         <div className={styles.message}>
                             <div className={styles.mess}>
-                                <span className={styles.author}>{lastMessage.author === "me" ? "Вы: " : ""}</span> {lastMessage.text}
+                                <span className={styles.author}>{lastMessage.author === "me" ? "Вы: " : ""}</span>  <span className={styles.textMess}>{lastMessage.text}</span>
                             </div>
                         </div>
                         <div className={styles.messageInfo}>

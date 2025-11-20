@@ -17,15 +17,21 @@ export default function UserList() {
 
     useEffect(() => {
         const calculateHeight = () => {
-            setHeight(window.innerHeight - 80)
+            setHeight(window.innerHeight - 55)
         }
         calculateHeight()
         window.addEventListener("resize", calculateHeight)
         return () => window.removeEventListener("resize", calculateHeight)
     }, [])
-
+    
     const handleResize = (event: any, data: any) => {
-        setWidth(data.size.width)
+        const newWidth = data.size.width;
+
+        if (newWidth <= 350) {
+            setWidth(55);
+        } else {
+            setWidth(newWidth);
+        }
     }
 
     return (
@@ -39,8 +45,8 @@ export default function UserList() {
                 overflow: "hidden",
             }}
             resizeHandles={["e"]}
-            minConstraints={[100, height]}
-            maxConstraints={[600, height]}
+            minConstraints={[55, height]}
+            maxConstraints={[450, height]}
         >
             <NavigationBar />
             <div className={styles.user_list}>
