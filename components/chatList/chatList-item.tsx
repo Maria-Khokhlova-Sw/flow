@@ -2,6 +2,9 @@
 
 import styles from "./chatList.module.scss"
 import type { User, Message } from "@/types/chats"
+import {useState, useRef} from "react";
+
+const HOLD_DELAY = 800;
 
 interface UserListItemProps {
     user: User
@@ -9,9 +12,33 @@ interface UserListItemProps {
     unreadCount: number
     isSelected: boolean
     onSelect: () => void
+    onLongPress: () => void
 }
 
-export function UserListItem({ user, lastMessage, unreadCount,  isSelected, onSelect }: UserListItemProps) {
+export function UserListItem({ user, lastMessage, unreadCount,  isSelected, onSelect, onLongPress }: UserListItemProps) {
+    const [didLongPress, setDidLongPress] = useState<boolean>(false)
+    const timerRef = useRef<NodeJS.Timeout | null>(null);
+    const handlePressStart = () => {
+        setDidLongPress(false);
+        timerRef.current = setTimeout(() => {
+            setDidLongPress(true);
+            onLongPress();
+            console.log('ok');
+        }, HOLD_DELAY);
+    }
+    const handlePressEnd = () => {
+        if(timerRef.current) {
+            clearTimeout(timerRef.current)
+            timerRef.current = null;
+        }
+    }
+    const handleClick = () => {
+        handlePressEnd();
+        if(didLongPress) {
+            return;
+        }
+        onSelect();
+    }
     const renderStatusIndicator = (message: Message) => {
         if(message.author !== "me") return null
 
@@ -39,7 +66,11 @@ export function UserListItem({ user, lastMessage, unreadCount,  isSelected, onSe
         return null
     }
     return (
-        <li className={`${styles.user_item} ${isSelected ? styles.active : ""}`} onClick={onSelect}>
+        <li className={`${styles.user_item} ${isSelected ? styles.active : ""}`}
+            onClick={handleClick}
+            onTouchStart={handlePressStart}
+            onTouchEnd = {handlePressEnd}
+        >
             <img
                 src={user.photoUrl}
                 alt={user.name}

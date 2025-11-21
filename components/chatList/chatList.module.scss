@@ -17,7 +17,6 @@
 }
 .message{
   overflow: hidden;
-  max-width: 90%;
   color: $light-gray;
   display: flex;
   justify-content: space-between;
@@ -27,7 +26,7 @@
   display: flex;
   flex-shrink: 1;
   min-width: 0;
-  max-width: 80%;
+  max-width: 85%;
 }
 .content{
   display: flex;

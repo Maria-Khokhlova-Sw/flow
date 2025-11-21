@@ -15,6 +15,10 @@ export default function UserList() {
 
     const initialWidth = 350
 
+    const handleChatLongPress = (userId) => {
+        console.log(`Длительное нажатие на чат ID: ${userId}.`);
+    }
+
     useEffect(() => {
         const calculateHeight = () => {
             setHeight(window.innerHeight - 55)
@@ -23,7 +27,7 @@ export default function UserList() {
         window.addEventListener("resize", calculateHeight)
         return () => window.removeEventListener("resize", calculateHeight)
     }, [])
-    
+
     const handleResize = (event: any, data: any) => {
         const newWidth = data.size.width;
 
@@ -63,6 +67,7 @@ export default function UserList() {
                                 unreadCount={unreadCount}
                                 isSelected={selectedUserId === user.id}
                                 onSelect={() => selectUser(user.id)}
+                                onLongPress={() => handleChatLongPress(user.id)}
                             />
                         )
                     })}
