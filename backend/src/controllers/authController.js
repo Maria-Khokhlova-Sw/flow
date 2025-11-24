@@ -38,12 +38,25 @@ exports.register = async (req, res, next) => {
 exports.login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
-    const user = await User.findByEmail(email);
 
-    if (!user || !(await bcrypt.compare(password, user.password_hash))) {
+    // Валидация
+    if (!email || !password) {
+      return res.status(400).json({ error: 'Email и пароль обязательны' });
+    }
+
+    // Поиск пользователя
+    const user = await User.findByEmail(email);
+    if (!user) {
       return res.status(401).json({ error: 'Неверный email или пароль' });
     }
 
+    // Проверка пароля
+    const isMatch = await bcrypt.compare(password, user.password_hash);
+    if (!isMatch) {
+      return res.status(401).json({ error: 'Неверный email или пароль' });
+    }
+
+    // Генерация JWT
     const token = jwt.sign(
       { userId: user.id },
       process.env.JWT_SECRET,
@@ -52,9 +65,13 @@ exports.login = async (req, res, next) => {
 
     res.json({
       token,
-      user: { id: user.id, email: user.email }
+      user: {
+        id: user.id,
+        email: user.email
+      }
     });
   } catch (err) {
+    console.error('Ошибка входа:', err);
     next(err);
   }
 };

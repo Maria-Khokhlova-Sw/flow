@@ -4,32 +4,34 @@ const { getIO } = require('../services/socketService');
 // Вспомогательная функция: получить или создать чат между двумя пользователями
 async function getOrCreateDirectChat(user1Id, user2Id) {
   const db = require('../config/db');
-  
-  // Упорядочиваем ID, чтобы чат был один и тот же: (1,2) = (2,1)
-  const [minId, maxId] = user1Id < user2Id ? [user1Id, user2Id] : [user2Id, user1Id];
-  const chatIdKey = `${minId}_${maxId}`;
 
-  // Проверяем, есть ли уже такой чат
-  let chat = await db.query(
-    `SELECT id FROM chats WHERE type = 'direct' AND id::text = $1`,
-    [chatIdKey]
+  const minId = Math.min(user1Id, user2Id);
+  const maxId = Math.max(user1Id, user2Id);
+  const chatId = `${minId}_${maxId}`;
+
+  // Попытка найти существующий чат
+  let result = await db.query(
+    'SELECT id FROM chats WHERE id = $1',
+    [chatId]
   );
 
-  if (chat.rows.length === 0) {
-    // Создаём чат с ID = "min_max"
-    const res = await db.query(
-      `INSERT INTO chats (id, type) VALUES ($1::text::integer, 'direct') RETURNING id`,
-      [chatIdKey]
-    );
-    // Добавляем участников
-    await db.query(
-      `INSERT INTO chat_participants (chat_id, user_id) VALUES ($1, $2), ($1, $3)`,
-      [res.rows[0].id, user1Id, user2Id]
-    );
-    return res.rows[0].id;
+  if (result.rows.length > 0) {
+    return result.rows[0].id;
   }
 
-  return chat.rows[0].id;
+  // Создаём чат
+  await db.query(
+    'INSERT INTO chats (id, type) VALUES ($1, $2)',
+    [chatId, 'direct']
+  );
+
+  // Добавляем участников
+  await db.query(
+    'INSERT INTO chat_participants (chat_id, user_id) VALUES ($1, $2), ($1, $3)',
+    [chatId, user1Id, user2Id]
+  );
+
+  return chatId;
 }
 
 exports.sendMessage = async (req, res, next) => {

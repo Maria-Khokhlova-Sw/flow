@@ -6,9 +6,10 @@ const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
 
+const db = require('./config/db');
 const authRoutes = require('./routes/auth');
 const messageRoutes = require('./routes/messages');
-const db = require('./config/db');
+const chatRoutes = require('./routes/chats');
 
 const app = express();
 const server = http.createServer(app);
@@ -31,6 +32,7 @@ db.connect();
 // Маршруты
 app.use('/api/auth', authRoutes);
 app.use('/api/messages', messageRoutes);
+app.use('/api/chats', chatRoutes);
 
 // Обработка 404
 app.use((req, res, next) => {

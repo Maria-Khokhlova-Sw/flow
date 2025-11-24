@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head><title>WebSocket Тест</title></head>
+<body>
+  <input id="token" placeholder="JWT токен" style="width: 300px">
+  <button onclick="connect()">Подключиться</button>
+  <div id="log" style="font-family: monospace; margin-top: 20px;"></div>
+
+  <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+  <script>
+    let socket;
+    const log = (msg) => {
+      document.getElementById('log').innerHTML += `<p>${msg}</p>`;
+    };
+
+    function connect() {
+      const token = document.getElementById('token').value;
+      socket = io('http://localhost:5000', { auth: { token } });
+
+      socket.on('connect', () => log('✅ Подключено'));
+      socket.on('new_message', (data) => {
+        log(`📩 Новое сообщение: ${data.content} (от ID ${data.from})`);
+      });
+    }
+  </script>
+</body>
+</html>
