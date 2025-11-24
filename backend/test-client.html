@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WebSocket Тест</title>
+</head>
+<body>
+  <h2>🔌 Тест подключения к WebSocket</h2>
+  <input type="text" id="token" placeholder="Вставь JWT токен" style="width: 300px;" />
+  <button onclick="connect()">Подключиться</button>
+  <button onclick="send()">Отправить себе</button>
+  <div id="log" style="margin-top: 20px; font-family: monospace;"></div>
+
+  <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+  <script>
+    let socket;
+
+    const log = (msg) => {
+      document.getElementById('log').innerHTML += 
+        `<p>${new Date().toLocaleTimeString()} — ${msg}</p>`;
+    };
+
+    function connect() {
+      const token = document.getElementById('token').value.trim();
+      if (!token) return alert('Сначала вставь токен!');
+
+      socket = io('http://localhost:5000', { auth: { token } });
+
+      socket.on('connect', () => {
+        log('✅ Подключено к серверу');
+      });
+
+      socket.on('new_message', (data) => {
+        log(`📩 Получено: "${data.content}" от ID ${data.from}`);
+      });
+
+      socket.on('message_sent', (data) => {
+        log(`📤 Отправлено получателю ${data.to}`);
+      });
+
+      socket.on('connect_error', (err) => {
+        log(`❌ Ошибка подключения: ${err.message}`);
+        console.error('Socket.IO connect_error:', err);
+      });
+    }
+
+    function send() {
+      if (!socket) return alert('Сначала подключись!');
+      socket.emit('private_message', {
+        to: 1,
+        content: 'Тестовое сообщение через WebSocket!',
+        timestamp: new Date().toISOString()
+      });
+    }
+  </script>
+</body>
+</html>
