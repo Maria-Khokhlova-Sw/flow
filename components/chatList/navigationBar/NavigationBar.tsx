@@ -1,17 +1,16 @@
 "use client"
 import styles from './navigationBar.module.scss'
 import  cn from 'classnames';
-import {useState} from "react";
 
-export default function NavigationBar() {
+interface NavigationBarProps {
+    activeIndex: number;
+    onClick: (index:number) => void;
+}
+export default function NavigationBar({activeIndex, onClick}: NavigationBarProps) {
     const categories = [
         'Всё',
         'Непрочитанные'
-    ];
-    const [activeIndex, setActiveIndex] = useState(0);
-    const handleClick = (index:number) => {
-        setActiveIndex(index);
-    }
+    ]
 
     return (
         <div className={styles.navigationBar}>
@@ -19,7 +18,7 @@ export default function NavigationBar() {
                 <button key={index} className={cn(
                     styles.navTab,
                     activeIndex === index && styles.active)}
-                        onClick={() => handleClick(index)}>
+                        onClick={() => onClick(index)}>
                     {category}
                 </button>
             ))}

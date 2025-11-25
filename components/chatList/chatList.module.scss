@@ -6,34 +6,26 @@
   color: $black;
   height: 70px;
   border-bottom: 1px solid $light-gray;
-  display: flex;
   align-items: center;
-  width: 100%;
-  gap: 10px;
   font-size: 16px;
+  touch-action: manipulation;
   &:hover{
     cursor: pointer;
   }
 }
 .message{
-  overflow: hidden;
   color: $light-gray;
-  display: flex;
-  justify-content: space-between;
-  padding-right: 15px;
 }
 .mess{
   display: flex;
   flex-shrink: 1;
-  min-width: 0;
-  max-width: 85%;
+  min-width: 0;;
 }
 .content{
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  width: 80%;
+  width: 100%;
   position: relative;
+  display: flex;
+  height: 100%;
 }
 
 .user_list{
@@ -53,14 +45,14 @@
 
 .messageInfo{
   position: absolute;
-  height: 100%;
   color: $light-gray;
   font-size: 12px;
   right: 10px;
+  top: 15px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  gap: 10px;
 }
 
 .unread_badge{
@@ -77,4 +69,16 @@
   text-overflow: ellipsis;
   flex-shrink: 1;
   min-width: 0;
+}
+.messTextBlock{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  overflow: hidden;
+}
+.messAboutUser{
+  align-items: center;
+  gap: 5px;
+  display: flex;
+  width: 90%;
 }

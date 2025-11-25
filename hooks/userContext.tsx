@@ -58,6 +58,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
                     timestamp: BASE_TIMESTAMP - 1000 * 60 * 60 * 5.6,
                     status: "read",
                 },
+                { id: "2-4", author: "them", text: "Утро доброе :)))))))))))))))))))))))) Утро доброе :))))))))))))))))))))))))  ", timestamp: BASE_TIMESTAMP - 1000 * 60 * 60 * 19.8, status: "sent" },
             ],
             3: [
                 { id: "3-1", author: "me", text: "Доброе утро!", timestamp: BASE_TIMESTAMP - 1000 * 60 * 60 * 12, status: "read" },

@@ -4,7 +4,7 @@ import {UserProvider} from "@/hooks/userContext";
 import HeaderChats from '@/components/header/mainHeader/headerChats';
 import './media.scss'
 import MainDesktop from "@/components/mainDesctop/MainDesktop";
-import UserList from "@/components/chatList/chatList";
+import UserList from "@/components/chatList/userList";
 import 'react-resizable/css/styles.css'
 
 

@@ -6,37 +6,29 @@
   color: #302E2E;
   height: 70px;
   border-bottom: 1px solid #c5c5c5;
-  display: flex;
   align-items: center;
-  width: 100%;
-  gap: 10px;
   font-size: 16px;
+  touch-action: manipulation;
 }
 .user_item:hover {
   cursor: pointer;
 }
 
 .message {
-  overflow: hidden;
   color: #c5c5c5;
-  display: flex;
-  justify-content: space-between;
-  padding-right: 15px;
 }
 
 .mess {
   display: flex;
   flex-shrink: 1;
   min-width: 0;
-  max-width: 85%;
 }
 
 .content {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  width: 80%;
+  width: 100%;
   position: relative;
+  display: flex;
+  height: 100%;
 }
 
 .user_list {
@@ -56,14 +48,14 @@
 
 .messageInfo {
   position: absolute;
-  height: 100%;
   color: #c5c5c5;
   font-size: 12px;
   right: 10px;
+  top: 15px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  gap: 10px;
 }
 
 .unread_badge {
@@ -80,6 +72,20 @@
   text-overflow: ellipsis;
   flex-shrink: 1;
   min-width: 0;
+}
+
+.messTextBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  overflow: hidden;
+}
+
+.messAboutUser {
+  align-items: center;
+  gap: 5px;
+  display: flex;
+  width: 90%;
 }
 
 /*# sourceMappingURL=chatList.module.css.map */

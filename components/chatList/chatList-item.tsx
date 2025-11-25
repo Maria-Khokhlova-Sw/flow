@@ -13,9 +13,10 @@ interface UserListItemProps {
     isSelected: boolean
     onSelect: () => void
     onLongPress: () => void
+    currentWidth: number
 }
 
-export function UserListItem({ user, lastMessage, unreadCount,  isSelected, onSelect, onLongPress }: UserListItemProps) {
+export function UserListItem({ user, lastMessage, unreadCount,  isSelected, onSelect, onLongPress, currentWidth }: UserListItemProps) {
     const [didLongPress, setDidLongPress] = useState<boolean>(false)
     const timerRef = useRef<NodeJS.Timeout | null>(null);
     const handlePressStart = () => {
@@ -38,6 +39,11 @@ export function UserListItem({ user, lastMessage, unreadCount,  isSelected, onSe
             return;
         }
         onSelect();
+    }
+    const handleContextMenu = (e: React.MouseEvent<HTMLLIElement>) => {
+        e.preventDefault();
+        onLongPress()
+        setDidLongPress(true);
     }
     const renderStatusIndicator = (message: Message) => {
         if(message.author !== "me") return null
@@ -70,24 +76,30 @@ export function UserListItem({ user, lastMessage, unreadCount,  isSelected, onSe
             onClick={handleClick}
             onTouchStart={handlePressStart}
             onTouchEnd = {handlePressEnd}
+            onContextMenu = {handleContextMenu}
         >
-            <img
-                src={user.photoUrl}
-                alt={user.name}
-                width="50"
-                height="50"
-                className={styles.photo_user}
-            />
             <div className={styles.content}>
-                <div className={styles.name}>{user.name}</div>
                 {lastMessage ? (
                     <>
-                        <div className={styles.message}>
-                            <div className={styles.mess}>
-                                <span className={styles.author}>{lastMessage.author === "me" ? "Вы: " : ""}</span>  <span className={styles.textMess}>{lastMessage.text}</span>
+                        <div className={styles.messAboutUser}>
+                        <img
+                            src={user.photoUrl}
+                            alt={user.name}
+                            width="50"
+                            height="50"
+                            className={styles.photo_user}
+                        />
+                        <div className={styles.messTextBlock}>
+                            <div className={styles.name}>{user.name}</div>
+                            <div className={styles.message}>
+                                <div className={styles.mess}>
+                                    <span className={styles.author}>{lastMessage.author === "me" ? "Вы: " : ""}</span>  <span className={styles.textMess}>{lastMessage.text}</span>
+                                </div>
                             </div>
                         </div>
-                        <div className={styles.messageInfo}>
+                        </div>
+                        {currentWidth > 55 && (
+                            <div className={styles.messageInfo}>
                             <div className={styles.message_meta}>
                       <span className={styles.time}>
                           {new Date(lastMessage.timestamp).toLocaleTimeString("ru-RU", {
@@ -96,11 +108,14 @@ export function UserListItem({ user, lastMessage, unreadCount,  isSelected, onSe
                           })}
                       </span>
                             </div>
-                            <div className={styles.indicators}>
-                                {renderStatusIndicator(lastMessage)}
-                                {unreadCount > 0 && <span className={styles.unread_badge}>{unreadCount}</span>}
-                            </div>
+                            {currentWidth > 55 && (
+                                <div className={styles.indicators}>
+                                    {renderStatusIndicator(lastMessage)}
+                                    {unreadCount > 0 && <span className={styles.unread_badge}>{unreadCount}</span>}
+                                </div>
+                            )}
                         </div>
+                            )}
                     </>
                 ) : (
                     <>

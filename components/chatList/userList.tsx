@@ -6,18 +6,32 @@ import { UserListItem } from "./chatList-item"
 import NavigationBar from "@/components/chatList/navigationBar/NavigationBar"
 import { ResizableBox } from "react-resizable"
 import { useEffect, useState } from "react"
+import {log} from "node:util";
 
 export default function UserList() {
     const { users, selectedUserId, selectUser } = useUsers()
     const { getLastMessage, getUnreadCount } = lastMessage()
     const [height, setHeight] = useState(0)
     const [width, setWidth] = useState(350)
+    const [activateCategory, setActivateCategory] = useState(0)
 
-    const initialWidth = 350
 
-    const handleChatLongPress = (userId) => {
+    const handleChatLongPress = (userId: number) => {
         console.log(`Длительное нажатие на чат ID: ${userId}.`);
     }
+    const handleCategoryClick = (index: number) => {
+        setActivateCategory(index)
+    }
+    const filteredUsers = users.filter(user => {
+        const unreadCount = getUnreadCount(user.id)
+        if (activateCategory === 0){
+            return true
+        }
+        if (activateCategory === 1) {
+            return unreadCount > 0;
+        }
+        return true
+    })
 
     useEffect(() => {
         const calculateHeight = () => {
@@ -31,7 +45,7 @@ export default function UserList() {
     const handleResize = (event: any, data: any) => {
         const newWidth = data.size.width;
 
-        if (newWidth <= 350) {
+        if (newWidth <= 250) {
             setWidth(55);
         } else {
             setWidth(newWidth);
@@ -52,10 +66,10 @@ export default function UserList() {
             minConstraints={[55, height]}
             maxConstraints={[450, height]}
         >
-            <NavigationBar />
+            <NavigationBar activeIndex={activateCategory} onClick={handleCategoryClick}/>
             <div className={styles.user_list}>
                 <ul>
-                    {users.map((user) => {
+                    {filteredUsers.map((user) => {
                         const lastMessage = getLastMessage(user.id)
                         const unreadCount = getUnreadCount(user.id)
 
@@ -68,6 +82,7 @@ export default function UserList() {
                                 isSelected={selectedUserId === user.id}
                                 onSelect={() => selectUser(user.id)}
                                 onLongPress={() => handleChatLongPress(user.id)}
+                                currentWidth={width}
                             />
                         )
                     })}
