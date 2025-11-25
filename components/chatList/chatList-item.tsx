@@ -108,12 +108,10 @@ export function UserListItem({ user, lastMessage, unreadCount,  isSelected, onSe
                           })}
                       </span>
                             </div>
-                            {currentWidth > 55 && (
                                 <div className={styles.indicators}>
                                     {renderStatusIndicator(lastMessage)}
                                     {unreadCount > 0 && <span className={styles.unread_badge}>{unreadCount}</span>}
                                 </div>
-                            )}
                         </div>
                             )}
                     </>

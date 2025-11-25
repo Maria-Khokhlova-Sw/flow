@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import styles from "./mainDesctop.module.scss";
 import { useUsers } from "@/hooks/userContext";
 import cn from "classnames";
+import type {Message} from "@/types/chats";
 
 export default function MainDesktop() {
     const { users, conversations, selectedUserId, sendMessage, markMessagesAsRead } = useUsers()
@@ -28,6 +29,30 @@ export default function MainDesktop() {
         if (!selectedUserId) return
         sendMessage(selectedUserId, text)
         setText("")
+    }
+    const renderStatusIndicator = (m: Message) => {
+        if (m.status === "read" && m.author === 'me') {
+            return(
+                <>
+                    <img
+                        src="/svg/indicator.svg"
+                        alt="прочитано"
+                        width="30" height="15"
+                        className="brightness-0 saturate-100"
+                        style={{
+                            filter: "invert(100%) brightness(200%)",
+                        }}
+                    />
+                </>
+            )
+        }else if(m.status ==="sent" && m.author === 'me'){
+            console.log(mess)
+            return (
+                <>
+                    <img src={"/svg/indicator.svg"} alt={"индикатор"} width="30" height="15"/>
+                </>
+            )
+        }
     }
 
     if (!selectedUser) {
@@ -63,6 +88,7 @@ export default function MainDesktop() {
                     >
                         {m.text}
                         <div className={styles.messTime} >
+                            {renderStatusIndicator(m)}
                             {new Date(m.timestamp).toLocaleTimeString("ru-RU", {
                                 hour: "2-digit",
                                 minute: "2-digit",

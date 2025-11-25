@@ -59,7 +59,7 @@
 }
 
 .bubble {
-  padding: 10px 10px 20px 10px;
+  padding: 10px 10px 24px 10px;
   border-radius: 4px;
   max-width: 500px;
   position: relative;
@@ -91,6 +91,7 @@
 }
 
 .messTime {
+  flex-wrap: nowrap;
   position: absolute;
   font-size: 12px;
   bottom: 3px;
