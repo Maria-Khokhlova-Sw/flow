@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Список чатов</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 0 16px;
+    }
+    input, button {
+      padding: 8px;
+      margin: 4px;
+      font-size: 16px;
+    }
+    .chat-item {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 12px;
+      background: #f9f9f9;
+    }
+    .chat-header {
+      display: flex;
+      justify-content: space-between;
+      font-weight: bold;
+    }
+    .chat-status {
+      font-size: 12px;
+      color: #059669;
+    }
+    .chat-status.offline { color: #dc2626; }
+    .chat-preview {
+      margin-top: 6px;
+      color: #555;
+    }
+    .chat-time {
+      font-size: 12px;
+      color: #777;
+    }
+    .error { color: red; }
+  </style>
+</head>
+<body>
+  <h2>📋 Список чатов</h2>
+  <input id="token" placeholder="JWT токен" style="width: 100%;" />
+  <button onclick="loadChats()">Загрузить чаты</button>
+  <div id="chatsContainer"></div>
+
+  <script>
+    async function api(url, token) {
+      const res = await fetch(`http://localhost:5000${url}`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (!res.ok) throw new Error(await res.text());
+      return res.json();
+    }
+
+    async function loadChats() {
+      const token = document.getElementById('token').value.trim();
+      if (!token) return alert('Введите токен');
+
+      try {
+        const chats = await api('/api/chats', token);
+        renderChats(chats);
+      } catch (err) {
+        document.getElementById('chatsContainer').innerHTML = 
+          `<p class="error">❌ Ошибка: ${err.message}</p>`;
+      }
+    }
+
+    function renderChats(chats) {
+      const container = document.getElementById('chatsContainer');
+      if (chats.length === 0) {
+        container.innerHTML = '<p>Нет чатов</p>';
+        return;
+      }
+
+      container.innerHTML = chats.map(chat => `
+        <div class="chat-item">
+          <div class="chat-header">
+            <span>${chat.partner.email}</span>
+            <span class="chat-status ${chat.partner.status === 'online' ? '' : 'offline'}">
+              ${chat.partner.status === 'online' ? '🟢 онлайн' : '🔴 оффлайн'}
+            </span>
+          </div>
+          <div class="chat-preview">${chat.lastMessage || '<i>Нет сообщений</i>'}</div>
+          <div class="chat-time">${new Date(chat.lastMessageAt).toLocaleString()}</div>
+        </div>
+      `).join('');
+    }
+  </script>
+</body>
+</html>

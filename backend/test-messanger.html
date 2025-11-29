@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Тест мессенджера (бэкенд)</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 0 16px;
+    }
+    input, button {
+      padding: 8px;
+      margin: 4px;
+      font-size: 16px;
+    }
+    #chatBox {
+      border: 1px solid #ccc;
+      height: 300px;
+      overflow-y: auto;
+      padding: 10px;
+      margin-top: 16px;
+      background: #f9f9f9;
+      font-family: monospace;
+    }
+    .msg {
+      margin: 6px 0;
+      padding: 4px 0;
+    }
+    .sent { color: #1e40af; }
+    .received { color: #059669; }
+    .system { color: #7c2d12; font-weight: bold; }
+    .error { color: #dc2626; }
+  </style>
+</head>
+<body>
+  <h2>🔧 Тест мессенджера — бэкенд</h2>
+
+  <h3>1. Аутентификация</h3>
+  <input id="email" placeholder="Email" value="alice@test.com" />
+  <input id="password" type="password" placeholder="Пароль" value="123456" />
+  <button onclick="register()">Регистрация</button>
+  <button onclick="login()">Вход</button>
+  <p><strong>Токен:</strong> <span id="tokenDisplay">—</span></p>
+
+  <h3>2. Отправить сообщение</h3>
+  <input id="toUserId" type="number" placeholder="ID получателя" value="2" />
+  <input id="messageText" placeholder="Текст сообщения" value="Привет!" />
+  <button onclick="sendMessage()">Отправить (REST)</button>
+
+  <h3>3. Чат (WebSocket)</h3>
+  <button onclick="connectWs()">Подключиться к WebSocket</button>
+  <div id="chatBox"></div>
+
+  <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+  <script>
+    let token = null;
+    let socket = null;
+
+    // Логирование в чат
+    function log(msg, className = '') {
+      const el = document.createElement('div');
+      el.className = `msg ${className}`;
+      el.textContent = `[${new Date().toLocaleTimeString()}] ${msg}`;
+      document.getElementById('chatBox').appendChild(el);
+      document.getElementById('chatBox').scrollTop = document.getElementById('chatBox').scrollHeight;
+    }
+
+    // Универсальный запрос к API
+    async function api(method, url, data = null) {
+      const headers = { 'Content-Type': 'application/json' };
+      if (token) headers['Authorization'] = `Bearer ${token}`;
+
+      const res = await fetch(`http://localhost:5000${url}`, {
+        method,
+        headers,
+        body: data ? JSON.stringify(data) : null
+      });
+
+      if (!res.ok) {
+        const err = await res.text();
+        throw new Error(err || 'Ошибка запроса');
+      }
+      return res.json();
+    }
+
+    // === РЕГИСТРАЦИЯ ===
+    async function register() {
+      try {
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const data = await api('POST', '/api/auth/register', { email, password });
+        token = data.token;
+        document.getElementById('tokenDisplay').textContent = token;
+        log('✅ Регистрация успешна', 'system');
+      } catch (err) {
+        log(`❌ Ошибка регистрации: ${err.message}`, 'error');
+      }
+    }
+
+    // === ВХОД ===
+    async function login() {
+      try {
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const data = await api('POST', '/api/auth/login', { email, password });
+        token = data.token;
+        document.getElementById('tokenDisplay').textContent = token;
+        log('✅ Вход выполнен', 'system');
+      } catch (err) {
+        log(`❌ Ошибка входа: ${err.message}`, 'error');
+      }
+    }
+
+    // === ОТПРАВКА СООБЩЕНИЯ ЧЕРЕЗ REST ===
+    async function sendMessage() {
+      if (!token) return alert('Сначала войдите!');
+      try {
+        const to = Number(document.getElementById('toUserId').value);
+        const content = document.getElementById('messageText').value;
+        await api('POST', '/api/messages', { to, content });
+        log(`📤 Отправлено: "${content}" → пользователь ${to}`, 'sent');
+      } catch (err) {
+        log(`❌ Ошибка отправки: ${err.message}`, 'error');
+      }
+    }
+
+    // === ПОДКЛЮЧЕНИЕ К WEBSOCKET ===
+    function connectWs() {
+      if (socket) return log('⚠️ Уже подключён', 'error');
+      if (!token) return log('❌ Сначала войдите!', 'error');
+
+      socket = io('http://localhost:5000', {
+        auth: { token }
+      });
+
+      socket.on('connect', () => {
+        log('🟢 WebSocket подключён', 'system');
+      });
+
+      socket.on('new_message', (data) => {
+        log(`📩 ${data.from}: "${data.content}"`, 'received');
+      });
+
+      socket.on('connect_error', (err) => {
+        log(`❌ Ошибка WebSocket: ${err.message}`, 'error');
+      });
+    }
+  </script>
+</body>
+</html>
