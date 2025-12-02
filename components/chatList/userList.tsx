@@ -6,7 +6,6 @@ import { UserListItem } from "./chatList-item"
 import NavigationBar from "@/components/chatList/navigationBar/NavigationBar"
 import { ResizableBox } from "react-resizable"
 import { useEffect, useState } from "react"
-import {log} from "node:util";
 
 export default function UserList() {
     const { users, selectedUserId, selectUser } = useUsers()

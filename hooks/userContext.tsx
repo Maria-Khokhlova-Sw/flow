@@ -16,6 +16,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
             { id: 1, name: "Не глупенький", photoUrl: "/img/photo/user2.jpg"},
             { id: 2, name: "Глупенький", photoUrl: "/img/photo/user3.jpg" },
             { id: 3, name: "Самый глупенький", photoUrl: "/img/photo/user4.jpg"},
+
         ],
         [],
     )

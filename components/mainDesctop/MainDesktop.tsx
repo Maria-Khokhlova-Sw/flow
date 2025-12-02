@@ -4,13 +4,16 @@ import styles from "./mainDesctop.module.scss";
 import { useUsers } from "@/hooks/userContext";
 import cn from "classnames";
 import type {Message} from "@/types/chats";
-
-export default function MainDesktop() {
+interface MainDesktopProps {
+    onBack?: () => void;
+}
+export default function MainDesktop({onBack}: MainDesktopProps) {
     const { users, conversations, selectedUserId, sendMessage, markMessagesAsRead } = useUsers()
     const [text, setText] = useState("")
     const listRef = useRef<HTMLDivElement | null>(null)
     const selectedUser = users.find((u) => u.id === selectedUserId) || null
     const mess = (selectedUserId && conversations[selectedUserId]) || []
+    const showBackButton = typeof onBack === 'function';
 
     useEffect(() => {
         if (listRef.current) {
@@ -69,6 +72,11 @@ export default function MainDesktop() {
     return (
         <div className={styles.desk}>
             <div className={styles.chatHeader}>
+                {showBackButton && (
+                    <button onClick={onBack} className={styles.backButton}>
+                        ←
+                    </button>
+                )}
                 <img
                     src={selectedUser.photoUrl}
                     alt={selectedUser.name}

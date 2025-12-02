@@ -1,5 +1,7 @@
+"use client"
 import styles from './headerChats.module.scss';
 import Image from 'next/image';
+
 
 export default function HeaderChats() {
     const user = {

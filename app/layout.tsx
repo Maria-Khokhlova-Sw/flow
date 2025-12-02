@@ -3,9 +3,8 @@ import './globals.css';
 import {UserProvider} from "@/hooks/userContext";
 import HeaderChats from '@/components/header/mainHeader/headerChats';
 import './media.scss'
-import MainDesktop from "@/components/mainDesctop/MainDesktop";
-import UserList from "@/components/chatList/userList";
 import 'react-resizable/css/styles.css'
+import ChatLayout from "@/components/chatList/chatLayout/ChatLayout";
 
 
 export const metadata: Metadata = {
@@ -18,13 +17,9 @@ export default function RootLayout() {
     return (
         <html lang="en">
         <body>
-        <HeaderChats />
-        <div className="MainContainer">
-            <UserProvider>
-                <UserList/>
-                <MainDesktop/>
-            </UserProvider>
-        </div>
+        <UserProvider>
+            <ChatLayout/>
+        </UserProvider>
         </body>
         </html>
     );
