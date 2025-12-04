@@ -1,5 +1,5 @@
 "use client";
-import UserList from "@/components/chatList/UserList";
+import UserList from "@/components/chatList/userList";
 import MainDesktop from "@/components/mainDesctop/MainDesktop";
 import { useUsers } from "@/hooks/userContext";
 import useIsMobile from "@/hooks/useIsMobile";

@@ -73,7 +73,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     const [conversations, setConversations] = useState<Conversations>(initialConversations)
     const [selectedUserId, setSelectedUserId] = useState<number | null>(null)
 
-    const selectUser = useCallback((id: number) => {
+    const selectUser = useCallback((id: number | null) => {
         setSelectedUserId(id)
     }, [])
 

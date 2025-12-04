@@ -20,7 +20,7 @@ export interface UserContextType {
     users: User[]
     conversations: Conversations
     selectedUserId: number | null
-    selectUser: (id: number) => void
+    selectUser: (id: number | null) => void
     sendMessage: (userId: number, text: string) => void
     markMessagesAsRead: (userId: number) => void
 }

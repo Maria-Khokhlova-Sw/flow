@@ -10,6 +10,7 @@ interface MainDesktopProps {
 export default function MainDesktop({onBack}: MainDesktopProps) {
     const { users, conversations, selectedUserId, sendMessage, markMessagesAsRead } = useUsers()
     const [text, setText] = useState("")
+    const fileInputRef = useRef<HTMLInputElement>(null);
     const listRef = useRef<HTMLDivElement | null>(null)
     const selectedUser = users.find((u) => u.id === selectedUserId) || null
     const mess = (selectedUserId && conversations[selectedUserId]) || []
@@ -33,6 +34,27 @@ export default function MainDesktop({onBack}: MainDesktopProps) {
         sendMessage(selectedUserId, text)
         setText("")
     }
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file || !selectedUserId) return;
+
+        if (!file.type.startsWith('image/')) {
+            alert('Поддерживаются только изображения.');
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = () => {
+            const base64 = reader.result as string;
+            sendMessage(selectedUserId, `image:${base64}`);
+            setText("");
+        };
+        reader.readAsDataURL(file);
+        e.target.value = '';
+    }
+    const handlePlusClick = () => {
+        fileInputRef.current?.click();
+    };
     const renderStatusIndicator = (m: Message) => {
         if (m.status === "read" && m.author === 'me') {
             return(
@@ -67,7 +89,6 @@ export default function MainDesktop({onBack}: MainDesktopProps) {
             </div>
         )
     }
-
 
     return (
         <div className={styles.desk}>
@@ -107,6 +128,16 @@ export default function MainDesktop({onBack}: MainDesktopProps) {
             </div>
 
             <form className={styles.inputRow} onSubmit={onSubmit}>
+                <div onClick={handlePlusClick}>
+                    +
+                </div>
+                <input
+                    type="file"
+                    accept="image/*"
+                    ref={fileInputRef}
+                    onChange={handleFileChange}
+                    style={{ display: 'none' }}
+                />
                 <input
                     type="text"
                     placeholder="Напишите сообщение…"
