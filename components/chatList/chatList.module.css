@@ -5,7 +5,6 @@
   list-style: none;
   color: #302E2E;
   height: 70px;
-  border-bottom: 1px solid #c3c3c3;
   align-items: center;
   font-size: 16px;
   touch-action: manipulation;
@@ -63,11 +62,12 @@
 }
 
 .unread_badge {
-  background-color: #007db8;
-  padding: 4px 8px;
+  background: linear-gradient(140.93deg, #0491D5 0%, #03A9DF 16.26%, #03B8E5 31.99%, #02C9EB 52.51%, #02D4F0 66.77%, #00FBFF 96.78%);
+  padding: 5px 8px;
   border-radius: 50%;
   color: white;
-  font-weight: bold;
+  font-weight: 500;
+  font-size: 11px;
 }
 
 .textMess {

@@ -83,8 +83,30 @@ export default function MainDesktop({onBack}: MainDesktopProps) {
     if (!selectedUser) {
         return (
             <div className={styles.desk}>
-                <div className={cn(styles.desk, styles.randomState)}>
-                    <div className={styles.random}>Ты в потоке</div>
+                <div className={styles.backgroundBlur}/>
+                <div className={styles.greetingsBlock}>
+                    <div className={styles.greetings}>
+                        <svg width="800" height="250" viewBox="0 0 500 150">
+                            <path
+                                id="curvedTextPath"
+                                fill="none"
+                                stroke="none"
+                                d="M 50 50 Q 250 200 450 50"
+                            />
+                            <text
+                                fontSize="22"
+                                fill="currentColor"
+                                textAnchor="middle"
+                            >
+                                <textPath
+                                    href="#curvedTextPath"
+                                    startOffset="50%"
+                                >
+                                    А ты хорош, если пользуешься FLOW
+                                </textPath>
+                            </text>
+                        </svg>
+                    </div>
                 </div>
             </div>
         )

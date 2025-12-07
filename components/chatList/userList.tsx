@@ -67,6 +67,7 @@ export default function UserList() {
         >
             <NavigationBar activeIndex={activateCategory} onClick={handleCategoryClick}/>
             <div className={styles.user_list}>
+
                 <ul>
                     {filteredUsers.map((user) => {
                         const lastMessage = getLastMessage(user.id)

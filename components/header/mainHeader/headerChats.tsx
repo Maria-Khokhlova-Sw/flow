@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 export default function HeaderChats() {
     const user = {
-        name: "user",
+        name: "Светлана Вальс",
         photo: "/img/photo/user1.jpg"
     }
     return (
@@ -19,6 +19,13 @@ export default function HeaderChats() {
                 <input type="text" className={styles.searchInput} placeholder="Поиск..." />
             </div>
             <div className={styles.user}>
+                <Image
+                    src="/svg/FLOW.svg"
+                    alt="Flow Icon"
+                    width={110}
+                    height={25}
+                    className={styles.flowIcon}
+                />
                 <div className={styles.name}>
                     {user.name}
                 </div>
