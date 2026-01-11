@@ -92,4 +92,70 @@
   width: 90%;
 }
 
+.sidebarContainer {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  overflow: hidden;
+}
+
+.searchContainer {
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  border-bottom: 1px solid #eee;
+  background: #fff;
+  flex-shrink: 0;
+}
+
+.searchButton {
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.searchInput {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  padding: 8px;
+  background: #f5f5f5;
+  border-radius: 8px;
+  margin-left: 8px;
+}
+
+.resizeHandleVertical {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 5px;
+  height: 100%;
+  background: transparent;
+  cursor: col-resize;
+  z-index: 10;
+}
+.resizeHandleVertical:hover {
+  background: rgba(3, 169, 244, 0.3);
+}
+
+.resizeHandleHorizontal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: transparent;
+  cursor: row-resize;
+  z-index: 10;
+}
+.resizeHandleHorizontal:hover {
+  background: rgba(3, 169, 244, 0.3);
+}
+
 /*# sourceMappingURL=chatList.module.css.map */

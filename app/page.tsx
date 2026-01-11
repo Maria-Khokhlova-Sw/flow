@@ -1,9 +1,0 @@
-
-export default function HomePage() {
-    return (
-        <main>
-            <h1>Добро пожаловать в Flow!</h1>
-            <p>Это главная страница. Если видите это — 404 пофикшен! 🚀</p>
-        </main>
-    );
-}
